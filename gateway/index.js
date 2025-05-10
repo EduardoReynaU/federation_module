@@ -3,7 +3,7 @@ import { ApolloGateway } from '@apollo/gateway';
 
 const gateway = new ApolloGateway({
   serviceList: [
-    { name: 'auth', url: 'https://auth-service-<YOUR_PROJECT>.a.run.app/graphql' },
+    { name: 'auth', url: 'https://auth-service-356996092654.us-central1.run.app/graphql' },
     // Aquí irán más servicios en el futuro
   ]
 });

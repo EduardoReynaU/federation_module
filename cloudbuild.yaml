@@ -1,20 +1,18 @@
 steps:
-  # 1️⃣ Construir imagen Docker desde el gateway/
   - name: 'gcr.io/cloud-builders/docker'
     args: [
-      'build', '-t',
+      'build',
+      '-t',
       'us-central1-docker.pkg.dev/$PROJECT_ID/federation-repo/federation-gateway',
       './gateway'
     ]
 
-  # 2️⃣ Subirla a Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
       'us-central1-docker.pkg.dev/$PROJECT_ID/federation-repo/federation-gateway'
     ]
 
-  # 3️⃣ Desplegar a Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args: [
@@ -23,9 +21,11 @@ steps:
       '--region=us-central1',
       '--platform=managed',
       '--allow-unauthenticated',
-      '--port=4000',
-      '--project=$PROJECT_ID'
+      '--port=4000'
     ]
 
 images:
   - us-central1-docker.pkg.dev/$PROJECT_ID/federation-repo/federation-gateway
+
+options:
+  logging: CLOUD_LOGGING_ONLY

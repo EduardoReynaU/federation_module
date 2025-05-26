@@ -1,18 +1,23 @@
-# Imagen base de Node.js
+# Imagen base oficial de Node.js
 FROM node:20
 
-# Directorio de trabajo
+# Establecer variable de entorno para producción
+ENV NODE_ENV=production
+
+# Directorio de trabajo dentro del contenedor
 WORKDIR /usr/src/app
 
-# Copiar dependencias
+# Copiar archivos de dependencias
 COPY package*.json ./
-RUN npm install
 
-# Copiar el código del Gateway
+# Instalar solo dependencias necesarias para producción
+RUN npm install --omit=dev
+
+# Copiar el resto del código fuente
 COPY . .
 
-# Exponer el puerto (usaremos 4000 para el Gateway)
+# Exponer el puerto del Gateway (4000)
 EXPOSE 4000
 
-# Comando de inicio
+# Comando para iniciar el servidor
 CMD ["node", "index.js"]

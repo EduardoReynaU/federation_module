@@ -29,3 +29,6 @@ steps:
 
 images:
   - us-central1-docker.pkg.dev/$PROJECT_ID/federation-repo/federation-gateway
+
+options:
+  logging: CLOUD_LOGGING_ONLY
